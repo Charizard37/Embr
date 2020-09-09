@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PostCard from "./PostCard.js";
 
 import {
   SafeAreaView,
@@ -12,6 +13,7 @@ import {
 } from 'react-native';
 
 const Home = ({ navigation }) => {
+
   return (
     <View>
       <Text>This is the Home Screen</Text>
@@ -19,6 +21,9 @@ const Home = ({ navigation }) => {
         onPress={() => navigation.navigate('Archive')}
         title='View Archived Postings'
       ></Button>
+      <PostCard></PostCard>
+      <PostCard></PostCard>
+      <PostCard></PostCard>
     </View>
   );
 };

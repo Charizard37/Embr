@@ -13,6 +13,10 @@ app.use(
   })
 );
 
+app.get('/', (req, res) => {
+  res.redirect('/graphql');
+});
+
 app.use('*', function (req, res) {
   res.status(404);
 });

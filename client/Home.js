@@ -15,10 +15,6 @@ const Home = ({ navigation }) => {
   return (
     <View>
       <Text>This is the Home Screen</Text>
-      <Button
-        onPress={() => navigation.navigate('Archive')}
-        title='View Archived Postings'
-      ></Button>
     </View>
   );
 };

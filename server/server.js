@@ -5,6 +5,15 @@ const schema = require('./schema.js');
 const PORT = 3000;
 const app = express();
 
+// //db
+// const sequelize = require('./config.js');
+
+// //Test connection to database
+// sequelize
+//   .authenticate()
+//   .then(() => console.log('Database connected'))
+//   .catch((err) => console.log('Error: ' + err));
+
 app.use(
   '/graphql',
   graphqlHTTP({

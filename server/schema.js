@@ -4,6 +4,8 @@ const {
   GraphQLString,
   GraphQLSchema,
   GraphQLList,
+  GraphQLNonNull,
+  GraphQLBoolean,
 } = require('graphql');
 
 //dummy data for now
@@ -12,22 +14,22 @@ const jobDB = [
     id: 1,
     company: 'Google',
     position: 'Software Engineer',
-    appliedDate: '9/7',
-    interview: 0,
+    applied: true,
+    interview: true,
   },
   {
     id: 2,
     company: 'Google',
     position: 'Front End Engineer',
-    appliedDate: '9/6',
-    interview: 1,
+    applied: true,
+    interview: true,
   },
   {
     id: 3,
     company: 'Facebook',
     position: 'Zuckerbergs Personal Assistant',
-    appliedDate: '8/6',
-    interview: 2,
+    applied: false,
+    interview: false,
   },
 ];
 
@@ -64,8 +66,11 @@ const JobType = new GraphQLObjectType({
     id: { type: GraphQLInt },
     company: { type: GraphQLString },
     position: { type: GraphQLString },
-    appliedDate: { type: GraphQLString },
-    interview: { type: GraphQLInt },
+    applied: { type: GraphQLBoolean },
+    phoneScreen: { type: GraphQLBoolean },
+    interview: { type: GraphQLBoolean },
+    takeHome: { type: GraphQLBoolean },
+    doubleDown: { type: GraphQLBoolean },
   }),
 });
 
@@ -78,9 +83,9 @@ const RootQuery = new GraphQLObjectType({
       args: {
         id: { type: GraphQLInt },
       },
-      resolve(parentValue, args) {
+      resolve(parentValue, { id }) {
         for (let job of jobDB) {
-          if (job.id === args.id) return job;
+          if (job.id === id) return job;
         }
       },
     },
@@ -93,6 +98,33 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+//Mutations
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addJob: {
+      type: JobType,
+      args: {
+        company: { type: new GraphQLNonNull(GraphQLString) },
+        position: { type: new GraphQLNonNull(GraphQLString) },
+        applied: { type: GraphQLBoolean },
+        phoneScreen: { type: GraphQLBoolean },
+        interview: { type: GraphQLBoolean },
+        takeHome: { type: GraphQLBoolean },
+        doubleDown: { type: GraphQLBoolean },
+      },
+      resolve(parentValue, args) {
+        jobDB.push({
+          id: jobDB.length,
+          ...args,
+        });
+        return jobDB[jobDB.length - 1];
+      },
+    },
+  },
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });

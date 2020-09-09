@@ -18,7 +18,7 @@ import {
 
 const Menu = ({ navigation }) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ marginTop: 40 }}>
       <Button onPress={() => navigation.navigate('Home')} title='Home'></Button>
       <Button onPress={() => navigation.navigate('Archive')} title='Archived Postings'></Button>
       <Button title='Stats (Coming Soon)'></Button>

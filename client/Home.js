@@ -26,9 +26,20 @@ const Home = ({ navigation }) => {
         <Image style={{ height: 32, width: 32 }} source={require('./assets/menu.png')}></Image>
       </TouchableOpacity>
       <Text style={{ textAlign: 'center', fontSize: 24 }}>Hi, Alex</Text>
-      <PostCard></PostCard>
-      <PostCard></PostCard>
-      <PostCard></PostCard>
+      <View style={{ paddingTop: 20 }}>
+        <View style={{ display: 'flex', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => navigation.navigate('Add Posting')}>
+            <Image
+              style={{ height: 64, width: 64 }}
+              source={require('./assets/add-item.png')}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+
+        <PostCard></PostCard>
+        <PostCard></PostCard>
+        <PostCard></PostCard>
+      </View>
     </View>
   );
 };

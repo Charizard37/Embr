@@ -2,9 +2,10 @@ import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from './Home.js';
-import Archive from './Archive.js';
+import Home from './Home';
+import Archive from './Archive';
 import Menu from './Menu.js';
+import AddPosting from './AddPosting';
 
 import {
   SafeAreaView,
@@ -28,6 +29,11 @@ const App = () => {
       <RootStack.Navigator>
         <RootStack.Screen name='Home' component={Home} options={{ title: 'Embr' }} />
         <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Menu' }} />
+        <RootStack.Screen
+          name='Add Posting'
+          component={AddPosting}
+          options={{ title: 'New Job Posting' }}
+        />
         <RootStack.Screen
           name='Archive'
           component={Archive}

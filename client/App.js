@@ -26,9 +26,13 @@ const App = () => {
   return (
     <NavigationContainer>
       <RootStack.Navigator>
-        <RootStack.Screen name='Home' component={Home} options={{ title: 'Home' }} />
-        <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Embr' }} />
-        <RootStack.Screen name='Archive' component={Archive} options={{ title: 'Archive' }} />
+        <RootStack.Screen name='Home' component={Home} options={{ title: 'Embr' }} />
+        <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Menu' }} />
+        <RootStack.Screen
+          name='Archive'
+          component={Archive}
+          options={{ title: 'Archived Postings' }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );

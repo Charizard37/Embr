@@ -16,8 +16,6 @@ import {
   Alert,
 } from 'react-native';
 
-const MenuStack = createStackNavigator();
-
 const Menu = ({ navigation }) => {
   return (
     <SafeAreaView>

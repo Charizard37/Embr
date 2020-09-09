@@ -20,12 +20,11 @@ const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View>
+    <View style={{ paddingLeft: 8, paddingTop: 8 }}>
       <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
         <Image style={{ height: 32, width: 32 }} source={require('./assets/menu.png')}></Image>
       </TouchableOpacity>
-      {/* <Image source='./assets/menu.png'></Image> */}
-      <Text style={{ textAlign: 'center' }}>Hi, Alex</Text>
+      <Text style={{ textAlign: 'center', fontSize: 24 }}>Hi, Alex</Text>
     </View>
   );
 };

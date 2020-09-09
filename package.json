@@ -1,20 +1,31 @@
 {
   "name": "embr",
   "displayName": "embr",
-  "version": "0.0.1",
   "private": true,
+  "version": "1.0.0",
+  "description": "A job application tracking/organization tool",
+  "author": "",
+  "license": "ISC",
+  "main": "index.js",
   "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start-native": "react-native start",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.2"
-  },
-  "devDependencies": {
+    "react-native": "0.63.2",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "nodemon": "^2.0.4",
+    "save": "^2.4.0"
+  }, 
+ "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
@@ -23,8 +34,8 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1"
-  },
-  "jest": {
+  },  
+"jest": {
     "preset": "react-native"
-  }
+  }  
 }

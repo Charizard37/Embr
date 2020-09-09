@@ -34,8 +34,8 @@ app.get('/ghlogin', passport.authenticate('github'));
 app.get(
 	'/auth/github/callback',
 	passport.authenticate('github', {
-		session: false,
 		failureRedirect: '/login',
+		failureFlash: true,
 	}),
 	(req, res) => {
 		// auth successful need to redirect to home page

@@ -31,10 +31,8 @@
     "react-native-reanimated": "^1.13.0",
     "react-native-safe-area-context": "^3.1.7",
     "react-native-screens": "^2.10.1",
-    "save": "^2.4.0",
     "pg": "^8.3.3",
     "sequelize": "^6.3.5"
-
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

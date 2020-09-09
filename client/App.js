@@ -1,4 +1,10 @@
-import React from 'react';
+import 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './Home.js';
+import Archive from './Archive.js';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,15 +16,18 @@ import {
   Alert,
 } from 'react-native';
 
+const Stack = createStackNavigator();
+
 const App = () => {
+  const [loggedIn, userLogin] = useState(false);
+
   return (
-    <>
-      <SafeAreaView>
-        <View>
-          <Button title='Press Me' onPress={() => Alert.alert('Simple Button pressed')}></Button>
-        </View>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={Home} options={{ title: 'Home' }} />
+        <Stack.Screen name='Archive' component={Archive} options={{ title: 'Archive' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

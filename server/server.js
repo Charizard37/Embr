@@ -1,8 +1,6 @@
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema.js');
-
-/* -------------------------------------------------------- GH OAuth -------------------------------------------------------- */
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 
@@ -13,12 +11,14 @@ const app = express();
 passport.use(
 	new GitHubStrategy(
 		{
-			clientID: 'Iv1.291c1e312abeaef8',
-			clientSecret: '5d912e93791f74f1d8482198dae1d47c0d73a8b8',
-			callbackURL: 'https://2b0b4f892122.ngrok.io/auth/github/callback',
+			authorizationURL: 'https://github.com/login/oauth/authorize',
+			clientID: '6656e9fb701948578da4',
+			clientSecret: '9384e2860766938e1a35a573604381c23dcc5af0',
+			callbackURL: 'http://localhost:3000/auth/github/callback',
 		},
 		(accessToken, refreshToken, profile, cb) => {
-			console.log(profile);
+			console.log('profile', profile);
+			console.log('accessToken', accessToken);
 			// User.findOrCreate({ githubId: profile.id }, (err, user) => { ---> to create database object
 			// return cb(err, user);
 			cb(null, profile);
@@ -33,10 +33,14 @@ app.get('/ghlogin', passport.authenticate('github'));
 
 app.get(
 	'/auth/github/callback',
-	passport.authenticate('github', { session: false }),
+	passport.authenticate('github', {
+		session: false,
+		failureRedirect: '/login',
+	}),
 	(req, res) => {
-		// auth successful not sure where to redirect with graphQl
+		// auth successful need to redirect to home page
 		res.send('Auth successful');
+		res.redirect('/');
 	}
 );
 

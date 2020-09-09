@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const UserModel = require('./userModel');
 const JobModel = require('./jobModel');
+const faker = require('faker');
+const _ = require('lodash');
 
 const sequelize = new Sequelize(
   'postgres://jblgpfps:OwDe8dXSE19gmzcYNPHHPMJ9aYKSeHT0@lallah.db.elephantsql.com:5432/jblgpfps',
@@ -16,6 +18,25 @@ User.hasMany(Job);
 Job.belongsTo(User);
 
 sequelize.sync({ force: true }).then(() => {
+  User.bulkCreate(
+    _.times(10, () => ({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName()
+    }))
+  );
+
+  Job.bulkCreate(
+    _.times(10, () => ({
+      company: faker.company.companyName(),
+      position: 'Software Engineer',
+      applied: true,
+      phoneScreen: true,
+      interview: false,
+      takeHome: true,
+      doubleDown: true
+    }))
+  );
+
   console.log('db created');
 });
 // const models = {

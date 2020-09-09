@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PostCard from './PostCard.js';
 
 import {
   SafeAreaView,
@@ -25,6 +26,9 @@ const Home = ({ navigation }) => {
         <Image style={{ height: 32, width: 32 }} source={require('./assets/menu.png')}></Image>
       </TouchableOpacity>
       <Text style={{ textAlign: 'center', fontSize: 24 }}>Hi, Alex</Text>
+      <PostCard></PostCard>
+      <PostCard></PostCard>
+      <PostCard></PostCard>
     </View>
   );
 };

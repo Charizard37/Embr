@@ -22,13 +22,12 @@ const RootStack = createStackNavigator();
 
 const App = () => {
   const [loggedIn, userLogin] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <NavigationContainer>
       <RootStack.Navigator>
-        <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Embr' }} />
         <RootStack.Screen name='Home' component={Home} options={{ title: 'Home' }} />
+        <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Embr' }} />
         <RootStack.Screen name='Archive' component={Archive} options={{ title: 'Archive' }} />
       </RootStack.Navigator>
     </NavigationContainer>

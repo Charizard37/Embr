@@ -21,10 +21,11 @@ const MenuStack = createStackNavigator();
 const Menu = ({ navigation }) => {
   return (
     <SafeAreaView>
-      <Text>Hello, Alex</Text>
       <Button onPress={() => navigation.navigate('Home')} title='Home'></Button>
       <Button onPress={() => navigation.navigate('Archive')} title='Archived Postings'></Button>
       <Button title='Stats (Coming Soon)'></Button>
+      <Button title='Profile'></Button>
+      <Button title='Log Out'></Button>
     </SafeAreaView>
   );
 };

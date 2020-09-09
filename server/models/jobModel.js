@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Job = sequilize.define(
+  return sequelize.define(
     'job',
     {
       id: {
@@ -10,19 +10,13 @@ module.exports = (sequelize, DataTypes) => {
       company: DataTypes.STRING,
       position: DataTypes.STRING,
       applied: DataTypes.BOOLEAN,
-      pnoneScreen: DataTypes.BOOLEAN,
-      interview: DataTypes.BOOLEAN,
-      takeHome: DataTypes.BOOLEAN,
-      doubleDown: DataTypes.BOOLEAN
+      pnoneScreen: { type: DataTypes.BOOLEAN, allowNull: true },
+      interview: { type: DataTypes.BOOLEAN, allowNull: true },
+      takeHome: { type: DataTypes.BOOLEAN, allowNull: true },
+      doubleDown: { type: DataTypes.BOOLEAN, allowNull: true }
     },
     {
       freezeTableName: true
     }
   );
-
-  Job.associate = (models) => {
-    Job.belongsTo(models.user);
-  };
-
-  return Job;
 };

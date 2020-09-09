@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequilize.define(
+  return sequelize.define(
     'user',
     {
       id: {
@@ -14,10 +14,4 @@ module.exports = (sequelize, DataTypes) => {
       freezeTableName: true
     }
   );
-
-  User.associate = (models) => {
-    User.hasMany(models.Job, { onDelete: 'CASCADE' });
-  };
-
-  return User;
 };

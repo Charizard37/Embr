@@ -1,25 +1,34 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
+const UserModel = require('./userModel');
+const JobModel = require('./jobModel');
 
 const sequelize = new Sequelize(
-  process.env.DATABASE,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
+  'postgres://jblgpfps:OwDe8dXSE19gmzcYNPHHPMJ9aYKSeHT0@lallah.db.elephantsql.com:5432/jblgpfps',
   {
     dialect: 'postgres'
   }
 );
 
-const models = {
-  User: sequelize.import('./userModel'),
-  Job: sequelize.import('./jobModel')
-};
+const User = UserModel(sequelize, Sequelize);
+const Job = JobModel(sequelize, Sequelize);
 
-Object.keys(models).forEach((key) => {
-  if ('associate' in models[key]) {
-    models[key].associate(models);
-  }
+User.hasMany(Job);
+Job.belongsTo(User);
+
+sequelize.sync({ force: true }).then(() => {
+  console.log('db created');
 });
+// const models = {
+//   User: sequelize.import('./userModel'),
+//   Job: sequelize.import('./jobModel')
+// };
 
-export { sequelize };
+// Object.keys(models).forEach((key) => {
+//   if ('associate' in models[key]) {
+//     models[key].associate(models);
+//   }
+// });
 
-export default models;
+module.exports = sequelize;
+
+// export default models;

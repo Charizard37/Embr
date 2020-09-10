@@ -12,16 +12,19 @@ import {
   Alert,
 } from 'react-native';
 
-const Archive = ({ navigation }) => {
+const Archive = ({ navigation, route }) => {
+  const PostCardArray = [];
+  const jobArray = route.params.jobArray;
+  console.log(jobArray);
+  if (jobArray.length) {
+    jobArray.forEach((job, i) => {
+      PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+    });
+  }
   return (
     <View>
       <Text style={{ textAlign: 'center', fontSize: 24 }}>Archived Postings</Text>
-      <View style={style.rowContainer}>
-        <PostCard navigation={navigation}></PostCard>
-        <PostCard navigation={navigation}></PostCard>
-        <PostCard navigation={navigation}></PostCard>
-        <PostCard navigation={navigation}></PostCard>
-      </View>
+      <View style={style.rowContainer}>{PostCardArray}</View>
     </View>
   );
 };

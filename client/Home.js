@@ -23,7 +23,7 @@ const Home = ({ navigation }) => {
     fetch('http://localhost:3000/graphql', {
       method: 'POST',
       body: JSON.stringify({
-        query: '{jobs {position, company, id}}',
+        query: '{jobs {position, company, id, applied}}',
       }),
       headers: { 'Content-Type': 'application/json' },
     })
@@ -35,18 +35,17 @@ const Home = ({ navigation }) => {
   }, []);
 
   const PostCardArray = [];
-  jobArray.forEach((job, i) => {
-    PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
-  });
-
+  if (jobArray.length) {
+    jobArray.forEach((job, i) => {
+      PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+    });
+  }
   return (
     <ScrollView>
       <View>
         <TouchableOpacity
           style={{ paddingLeft: 8, paddingTop: 8 }}
-          onPress={() =>
-            navigation.navigate('Menu', { jobObj: { jobStatus: 'applied', company: 'Google' } })
-          }
+          onPress={() => navigation.navigate('Menu', { jobArray: jobArray })}
         >
           <Image style={{ height: 32, width: 32 }} source={require('./assets/menu.png')}></Image>
         </TouchableOpacity>
@@ -60,17 +59,7 @@ const Home = ({ navigation }) => {
               ></Image>
             </TouchableOpacity>
           </View>
-          <View style={styles.rowContainer}>
-            {PostCardArray}
-            {/* <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard> */}
-          </View>
+          <View style={styles.rowContainer}>{PostCardArray}</View>
         </View>
       </View>
     </ScrollView>

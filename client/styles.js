@@ -64,14 +64,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   PostCardFrame: {
-    borderWidth: 1,
-    borderColor: 'black',
+    // borderWidth: 1,
+    // borderColor: 'black',
     marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
     marginLeft: 10,
     maxHeight: 175,
     width: '40%',
+    borderRadius: 10,
   },
   CompanyName: {
     marginTop: 5,

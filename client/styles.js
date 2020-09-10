@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  containerFull: {
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10,
+    marginLeft: 10,
+  },
   imageContainer: {
     marginTop: 10,
     alignItems: 'center',
@@ -83,6 +89,24 @@ const styles = StyleSheet.create({
     color: 'grey',
     textAlign: 'center',
   },
+  CompanyNameFull: {
+    marginTop: 5,
+    marginBottom: 5,
+    marginRight: 5,
+    marginLeft: 5,
+    color: 'black',
+    textAlign: 'left',
+    fontSize: 40,
+  },
+  JobTitleFull: {
+    marginTop: 5,
+    marginBottom: 5,
+    marginRight: 5,
+    marginLeft: 5,
+    color: 'grey',
+    textAlign: 'left',
+    fontSize: 30,
+  },
   logo: {
     maxHeight: 75,
     maxWidth: 75,
@@ -91,6 +115,11 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
+  },
+  textInputStyle: {
+    height: 40,
+    backgroundColor: 'azure',
+    fontSize: 20,
   },
   newPostingView: {
     marginTop: 100,

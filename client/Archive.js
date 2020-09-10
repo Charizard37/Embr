@@ -15,7 +15,6 @@ import {
 const Archive = ({ navigation, route }) => {
   const PostCardArray = [];
   const jobArray = route.params.jobArray;
-  console.log(jobArray);
   if (jobArray.length) {
     jobArray.forEach((job, i) => {
       PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);

@@ -30,15 +30,15 @@ const companyLogoObj = {
 const statusColor = (status) => {
   switch (status) {
     case 'Not yet applied':
-      return 'blue';
+      return '#e6f2ff';
     case 'Applied, waiting to hear back':
-      return 'yellow';
+      return '#ffffb3';
     case 'Heard back':
-      return 'green';
+      return '#c1f0c1';
     case 'Offer received':
-      return 'purple';
+      return '#00b33c';
     case 'Rejected':
-      return 'red';
+      return '#ff5c33';
     case true:
       return '#99ccff';
     default:
@@ -56,7 +56,9 @@ const PostCard = ({ navigation, route, jobObj }) => {
   const cardStyle = { ...styles.PostCardFrame, backgroundColor: color }; //ThESE ARE THE STYLES FOR THE FIRST VIEW COMPONENT
   return (
     <View style={cardStyle}>
-      <TouchableOpacity onPress={() => navigation.navigate('PostFull' /*, {jobObj: jobObj}*/)}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('PostFull', { jobObj: jobObj, logo: logo })}
+      >
         <Text style={styles.CompanyName}>{jobObj.company}</Text>
         <Text style={styles.JobTitle}>{jobObj.position}</Text>
         <View style={styles.imageContainer}>

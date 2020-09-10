@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 
 const Menu = ({ navigation, route }) => {
-  // console.log(route.params.jobArray);
   const jobArray = route.params.jobArray;
   return (
     <SafeAreaView style={{ marginTop: 40 }}>

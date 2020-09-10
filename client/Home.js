@@ -23,7 +23,8 @@ const Home = ({ navigation }) => {
     fetch('http://localhost:3000/graphql', {
       method: 'POST',
       body: JSON.stringify({
-        query: '{jobs {position, company, id, applied}}',
+        query:
+          '{jobs {position, company, id, applied, phoneScreen, interview, takeHome, doubleDown }}',
       }),
       headers: { 'Content-Type': 'application/json' },
     })
@@ -31,7 +32,8 @@ const Home = ({ navigation }) => {
       .then((data) => {
         console.log('DATAAAAA', data.data);
         setJobArray(data.data.jobs);
-      });
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   const PostCardArray = [];
@@ -40,6 +42,14 @@ const Home = ({ navigation }) => {
       PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
     });
   }
+
+  const renderContent = PostCardArray.length ? (
+    <View style={styles.rowContainer}>{PostCardArray}</View>
+  ) : (
+    <Text style={{ textAlign: 'center', fontSize: 16 }}>
+      No jobs, click the "+" button to add a job
+    </Text>
+  );
   return (
     <ScrollView>
       <View>
@@ -59,7 +69,7 @@ const Home = ({ navigation }) => {
               ></Image>
             </TouchableOpacity>
           </View>
-          <View style={styles.rowContainer}>{PostCardArray}</View>
+          {renderContent}
         </View>
       </View>
     </ScrollView>

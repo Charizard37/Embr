@@ -6,6 +6,7 @@ import Home from './Home';
 import Archive from './Archive';
 import Menu from './Menu.js';
 import AddPosting from './AddPosting';
+import PostFull from './PostFull.js';
 
 import {
   SafeAreaView,
@@ -29,6 +30,7 @@ const App = () => {
       <RootStack.Navigator>
         <RootStack.Screen name='Home' component={Home} options={{ title: 'Embr' }} />
         <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Menu' }} />
+        <RootStack.Screen name='PostFull' component={PostFull} options={{ title: 'Details' }} />
         <RootStack.Screen
           name='Add Posting'
           component={AddPosting}

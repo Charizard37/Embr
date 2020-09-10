@@ -64,14 +64,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   PostCardFrame: {
-    borderWidth: 1,
-    borderColor: 'black',
+    // borderWidth: 1,
+    // borderColor: 'black',
     marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
     marginLeft: 10,
     maxHeight: 175,
-    maxWidth: 175,
+    width: '40%',
+    borderRadius: 10,
   },
   CompanyName: {
     marginTop: 5,
@@ -114,10 +115,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rowContainer: {
+    display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textInputStyle: {
-    height: 40,
+    height: '40%',
+    width: '100%',
     backgroundColor: 'azure',
     fontSize: 20,
   },
@@ -154,6 +160,25 @@ const styles = StyleSheet.create({
   inputAndroid: {
     height: 30,
     textAlign: 'center',
+  },
+  fullNotes: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  checkContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 9,
+  },
+  companyContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 30,
   },
 });
 

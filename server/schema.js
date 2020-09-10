@@ -146,6 +146,7 @@ const mutation = new GraphQLObjectType({
         doubleDown: { type: GraphQLBoolean },
       },
       async resolve(parentValue, args) {
+        console.log('editJOB');
         const selectedJob = await Job.findOne({
           where: {
             id: args.id,

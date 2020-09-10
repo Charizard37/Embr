@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PostCard from './PostCard';
+import style from './styles';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,13 +12,20 @@ import {
   Alert,
 } from 'react-native';
 
-const Archive = ({ navigation }) => {
+const Archive = ({ navigation, route }) => {
+  const PostCardArray = [];
+  const jobArray = route.params.jobArray;
+  if (jobArray.length) {
+    jobArray.forEach((job, i) => {
+      if (job.status === 'Rejected') {
+        PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+      }
+    });
+  }
   return (
     <View>
       <Text style={{ textAlign: 'center', fontSize: 24 }}>Archived Postings</Text>
-      <PostCard navigation={navigation}></PostCard>
-      <PostCard navigation={navigation}></PostCard>
-      <PostCard navigation={navigation}></PostCard>
+      <View style={style.rowContainer}>{PostCardArray}</View>
     </View>
   );
 };

@@ -18,24 +18,26 @@ import {
 } from 'react-native';
 
 const Home = ({ navigation }) => {
-  // const [jobArray, setJobArray] = useState({});
-  // useEffect(() => {
-  //   fetch('http://localhost:3000', {
-  //     method: 'POST',
-  //     body: JSON.stringify(username),
-  //     headers: {'Conent-Type': 'application/json'}
-  //   })
-  //   .then(data => data.json())
-  //   .then(data => {
-  //     console.log("DATAAAAA", data)
-  //     // setJobArray(data.jobs);
-  //   })
-  // }, [])
+  const [jobArray, setJobArray] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      body: JSON.stringify({
+        query: '{jobs {position, company, id}}',
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log('DATAAAAA', data.data);
+        setJobArray(data.data.jobs);
+      });
+  }, []);
 
-  // const PostCardArray = [];
-  // for(let i = 0; i < 6; ++i){
-  //   PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={jonArray[i]}/>)
-  // }
+  const PostCardArray = [];
+  jobArray.forEach((job, i) => {
+    PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+  });
 
   return (
     <ScrollView>
@@ -59,15 +61,15 @@ const Home = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.rowContainer}>
-            {/*{PostCardArray}*/}
+            {PostCardArray}
+            {/* <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
-            <PostCard navigation={navigation}></PostCard>
+            <PostCard navigation={navigation}></PostCard> */}
           </View>
         </View>
       </View>

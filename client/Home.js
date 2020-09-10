@@ -24,7 +24,7 @@ const Home = ({ navigation }) => {
       method: 'POST',
       body: JSON.stringify({
         query:
-          '{jobs {position, company, id, status, phoneScreen, interview, takeHome, doubleDown }}',
+          '{jobs {position, company, id, status, phoneScreen, interview, takeHome, doubleDown, comments }}',
       }),
       headers: { 'Content-Type': 'application/json' },
     })

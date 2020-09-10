@@ -23,23 +23,30 @@ const PostFull = ({ navigation, route }) => {
 
   const companyLogo = route.params.logo;
   const { jobObj } = route.params;
-  const { status, phoneScreen, interview, takeHome, doubleDown } = jobObj;
+  const { id, status, phoneScreen, interview, takeHome, doubleDown, comments } = jobObj;
+
   const [appStatus, setAppStatus] = useState(status);
+  const [appPhoneScreen, setAppPhoneScreen] = useState(phoneScreen);
+  const [appInterview, setAppInterview] = useState(interview);
+  const [appTakeHome, setAppTakeHome] = useState(takeHome);
+  const [appDoubleDown, setAppDoubleDown] = useState(doubleDown);
+  const [appComments, setAppComments] = useState(comments);
 
-  // console.log(applied, phoneScreen);
+  const saveChanges = () => {
+    fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      body: JSON.stringify({
+        query: `mutation {editJob(id: ${id}, status: "${appStatus}", phoneScreen: ${appPhoneScreen}, interview: ${appInterview}, takeHome: ${appTakeHome}, doubleDown: ${appDoubleDown}, comments: "${appComments}"){id}}`,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log('Mutated that sucka');
+      })
+      .catch((error) => console.log(error));
+  };
 
-  //   useEffect(() => {
-  //       fetch('http://localhost:3000', {
-  //           method: 'POST',
-  //           body: JSON.stringify(username),
-  //           headers: {'Conent-Type': 'application/json'}
-  //       })
-  //       .then(data => data.json())
-  //       .then(data => {
-  //           console.log("DATAAAAA", data)
-  //           // setJobArray(data.jobs);
-  //       })
-  //   }, [])
   return (
     <View style={styles.containerFull}>
       <View style={styles.companyContainer}>
@@ -66,19 +73,35 @@ const PostFull = ({ navigation, route }) => {
       <View style={styles.fullNotes}>
         <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Double Down</Text>
-          <CheckBox value={doubleDown} disabled={false} onValueChange={() => setCheck(!checked)} />
+          <CheckBox
+            value={doubleDown}
+            disabled={false}
+            onValueChange={() => setAppDoubleDown(!appDoubleDown)}
+          />
         </View>
         <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Phonescreen</Text>
-          <CheckBox value={phoneScreen} disabled={false} onValueChange={() => setCheck(!checked)} />
+          <CheckBox
+            value={phoneScreen}
+            disabled={false}
+            onValueChange={() => setAppPhoneScreen(!appPhoneScreen)}
+          />
         </View>
         <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Interview</Text>
-          <CheckBox value={interview} disabled={false} onValueChange={() => setCheck(!checked)} />
+          <CheckBox
+            value={interview}
+            disabled={false}
+            onValueChange={() => setAppInterview(!appInterview)}
+          />
         </View>
         <View style={styles.checkContainer}>
-          <Text style={{ fontSize: 24 }}>Takehome</Text>
-          <CheckBox value={takeHome} disabled={false} onValueChange={() => setCheck(!checked)} />
+          <Text style={{ fontSize: 24 }}>Take-Home</Text>
+          <CheckBox
+            value={takeHome}
+            disabled={false}
+            onValueChange={() => setAppTakeHome(!appTakeHome)}
+          />
         </View>
 
         {/* Phonescreen, Interview, Takehome, DoubleDowns Checkboxes*/}
@@ -89,8 +112,10 @@ const PostFull = ({ navigation, route }) => {
           placeholder='Notes'
           onChangeText={(text) => console.log(text)}
           multiline={true}
-        ></TextInput>
-        <Button onPress={() => console.log('Submitted')} title='Save Changes' />
+        >
+          {comments}
+        </TextInput>
+        <Button onPress={saveChanges} title='Save Changes' />
         <Button onPress={() => console.log('Submitted')} title='Archive Posting' />
       </View>
     </View>

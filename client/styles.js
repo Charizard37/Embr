@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textInputStyle: {
-    height: 40,
+    height: '40%',
+    width: '100%',
     backgroundColor: 'azure',
     fontSize: 20,
   },
@@ -158,6 +159,25 @@ const styles = StyleSheet.create({
   inputAndroid: {
     height: 30,
     textAlign: 'center',
+  },
+  fullNotes: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  checkContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 9,
+  },
+  companyContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 30,
   },
 });
 

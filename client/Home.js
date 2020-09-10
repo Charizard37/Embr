@@ -66,6 +66,8 @@ const Home = ({ navigation }) => {
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
+            <PostCard navigation={navigation}></PostCard>
+            <PostCard navigation={navigation}></PostCard>
           </View>
         </View>
       </View>

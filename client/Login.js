@@ -15,7 +15,7 @@ import {
 	Linking,
 } from 'react-native';
 
-const logoImage = require('./assets/githublogo.png');
+const logoImage = require('./assets/logo1.png');
 
 const Login = ({ loggedIn, userLogin }) => {
 	const [authResult, setAuthResult] = useState(false);
@@ -29,23 +29,20 @@ const Login = ({ loggedIn, userLogin }) => {
 	};
 
 	return (
-		<ScrollView style={styles.mainContainer}>
-			<View style={styles.container}>
-				<Text style={styles.baseText}>
-					<Text style={styles.titleText}>embr</Text>
-				</Text>
-				<View style={styles.buttonContainer}>
-					<View style={styles.button}>
-						<Button
-							style={styles.button}
-							testID="loginButton"
-							onPress={handleAuth}
-							title="Login with GitHub"
-						/>
-					</View>
+		<View style={styles.container}>
+			<Image style={styles.logo} source={require('./assets/logo1.png')} />
+			<Text style={styles.baseText}></Text>
+			<View style={styles.buttonContainer}>
+				<View style={styles.button}>
+					<Button
+						style={styles.button}
+						testID="loginButton"
+						onPress={handleAuth}
+						title="Login with GitHub"
+					/>
 				</View>
 			</View>
-		</ScrollView>
+		</View>
 	);
 };
 
@@ -53,6 +50,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		flexDirection: 'column',
 		justifyContent: 'space-between',
+		backgroundColor: 'black',
 	},
 	button: {
 		width: 300,
@@ -66,15 +64,17 @@ const styles = StyleSheet.create({
 		fontSize: 26,
 		fontWeight: 'bold',
 	},
+	logo: {
+		width: 420,
+		height: 100,
+	},
 	container: {
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
 		marginTop: 100,
-	},
-	mainContainer: {
-		backgroundColor: '#003f5c',
+		backgroundColor: 'black',
 	},
 });
 

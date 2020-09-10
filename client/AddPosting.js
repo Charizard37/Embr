@@ -18,6 +18,21 @@ const AddPosting = ({ navigation }) => {
   const [positionName, setPositionName] = useState('');
   const [appStatus, setAppStatus] = useState('');
 
+  const createJob = () => {
+    fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      body: JSON.stringify({
+        query: `mutation {addJob(user_id: 1, company: "${companyName}", position: "${positionName}", status: "${appStatus}", phoneScreen: ${false}, interview: ${false}, takeHome: ${false}, doubleDown: ${false}, comments: "${'New job'}"){id}}`,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log('Mutated that sucka');
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <View style={styles.newPostingView}>
@@ -48,14 +63,7 @@ const AddPosting = ({ navigation }) => {
             { label: 'Rejected', value: 'Rejected' },
           ]}
         ></RNPickerSelect>
-        <Button
-          title='Add Job Application'
-          onPress={() => {
-            fetch('http://localhost:3000/')
-              .then((data) => data.json())
-              .then((data) => console.log(data));
-          }}
-        ></Button>
+        <Button title='Add Job Application' onPress={createJob}></Button>
       </View>
     </>
   );

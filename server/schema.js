@@ -118,7 +118,7 @@ const mutation = new GraphQLObjectType({
         doubleDown: { type: GraphQLBoolean },
       },
       async resolve(parentValue, args) {
-        // console.log(`entered`);
+        console.log(`adding job`);
         const [newJob, created] = await Job.findOrCreate({
           where: {
             company: args.company,

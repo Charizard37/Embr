@@ -50,16 +50,48 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginRight: 10,
         marginLeft: 10,
-        backgroundColor: "#ffffff",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    imageContainer: {
+      marginTop: 10,
+      alignItems: "center",
     },
     PostCardFrame: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: "black",
         marginTop: 10,
         marginBottom: 10,
         marginRight: 10,
         marginLeft: 10,
-    }
+        maxHeight: 175,
+        maxWidth: 175,
+    },
+    CompanyName: {
+      marginTop: 5,
+      marginBottom: 5,
+      marginRight: 5,
+      marginLeft: 5,
+      color: "black",
+      textAlign: "center",
+    },
+    JobTitle: {
+      marginTop: 5,
+      marginBottom: 5,
+      marginRight: 5,
+      marginLeft: 5,
+      color: "grey",
+      textAlign: "center",
+    },
+    logo: {
+      maxHeight: 75,
+      maxWidth: 75,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    rowContainer: {
+      flexDirection: "row",
+    },
   });
 
   export default styles;

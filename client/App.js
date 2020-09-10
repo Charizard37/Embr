@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Home.js';
 import Archive from './Archive.js';
 import Menu from './Menu.js';
+import PostFull from './PostFull.js';
 
 import {
   SafeAreaView,
@@ -28,6 +29,7 @@ const App = () => {
       <RootStack.Navigator>
         <RootStack.Screen name='Home' component={Home} options={{ title: 'Embr' }} />
         <RootStack.Screen name='Menu' component={Menu} options={{ title: 'Menu' }} />
+        <RootStack.Screen name='PostFull' component={PostFull} options={{ title: 'Details' }} />
         <RootStack.Screen
           name='Archive'
           component={Archive}

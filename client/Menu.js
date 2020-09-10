@@ -16,7 +16,8 @@ import {
   Alert,
 } from 'react-native';
 
-const Menu = ({ navigation }) => {
+const Menu = ({ navigation, route }) => {
+  console.log(route.params.jobObj);
   return (
     <SafeAreaView style={{ marginTop: 40 }}>
       <Button onPress={() => navigation.navigate('Home')} title='Home'></Button>

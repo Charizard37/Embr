@@ -23,7 +23,11 @@ const Home = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={{ paddingLeft: 8, paddingTop: 8 }}>
-        <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('Menu', { jobObj: { jobStatus: 'applied', company: 'Google' } })
+          }
+        >
           <Image style={{ height: 32, width: 32 }} source={require('./assets/menu.png')}></Image>
         </TouchableOpacity>
         <Text style={{ textAlign: 'center', fontSize: 24 }}>Hi, Alex</Text>

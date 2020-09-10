@@ -44,16 +44,17 @@ const statusColor = (status) => {
   }
 }
 
-const PostCard = ({ navigation, jobObj, logoName}) => {
-  const logoName = companyLogoObj[jobObj.companyName.toLowerCase()];
+const PostCard = ({ navigation, /*jobObj, logoName*/}) => {
+  // const logoName = companyLogoObj[jobObj.companyName.toLowerCase()];
 
-  const color = statusColor(jobObj.status);
-
+  // const color = statusColor(jobObj.status);
+  //{...styles.PostCardFrame, backgroundColor: color} ThESE ARE THE STYLES FOR THE FIRST VIEW COMPONENT
+  const logoName = 'google.jpg'; //temp line until backend gets merged
   return (
-    <View style={{...styles.PostCardFrame, backgroundColor: color}}>
-      <TouchableOpacity onPress={() => navigation.navigate('PostFull', {jobObj: jobObj})}>
-  <Text style={styles.CompanyName}>{jobObj.companyName}</Text>
-        <Text style={styles.JobTitle}>{jobObj.jobTitle}</Text>
+    <View style={styles.PostCardFrame}>
+      <TouchableOpacity onPress={() => navigation.navigate('PostFull' /*, {jobObj: jobObj}*/)}>
+  <Text style={styles.CompanyName}>COMPANY NAME {/*{jobObj.companyName}*/}</Text>
+        <Text style={styles.JobTitle}>JOB TITLE {/*{jobObj.jobTitle}*/}</Text>
         <View style={styles.imageContainer}>
             <Image style={styles.logo} source={require(`./assets/${logoName}`)} />
         </View>

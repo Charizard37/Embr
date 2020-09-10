@@ -19,18 +19,18 @@ const companyLogo = 'twitter.png';
 
 const PostFull = ({ navigation }) => {
   const [jobArray, setJobArray] = useState({});
-  useEffect(() => {
-      fetch('http://localhost:3000', {
-          method: 'POST',
-          body: JSON.stringify(username),
-          headers: {'Conent-Type': 'application/json'}
-      })
-      .then(data => data.json())
-      .then(data => {
-          console.log("DATAAAAA", data)
-          // setJobArray(data.jobs);
-      })
-  }, [])
+//   useEffect(() => {
+//       fetch('http://localhost:3000', {
+//           method: 'POST',
+//           body: JSON.stringify(username),
+//           headers: {'Conent-Type': 'application/json'}
+//       })
+//       .then(data => data.json())
+//       .then(data => {
+//           console.log("DATAAAAA", data)
+//           // setJobArray(data.jobs);
+//       })
+//   }, [])
   return (
     <View style={styles.containerFull}>
         <View style={styles.rowContainer}>

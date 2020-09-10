@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import App from './App';
@@ -13,49 +13,37 @@ import {
 	Button,
 	Image,
 	Linking,
+	WebBrowser,
 } from 'react-native';
 
-import { authenticate } from 'passport';
+const logoImage = require('./assets/githublogo.png');
 
 const Login = ({ loggedIn, userLogin }) => {
-	const [authenticated, setAuth] = useState(false);
-	const [context, setContext] = useState(null);
+	const [authResult, setAuthResult] = useState(loggedIn);
 
-	const aunthenticate = async () => {
-		const redirectUrl = await Linking.getInitialURL();
-		const authUrl = 'http://localhost:3000/ghlogin';
+	const url = 'http://localhost:3000/ghlogin';
 
-		try {
-			const authResult = await WebBrowser.openAuthSessionAsync(
-				authUrl,
-				redirectUrl
-			);
-			await setAuth(true);
-		} catch (err) {
-			console.log('Error', err);
-		}
+	const handleAuth = () => {
+		Linking.openURL(url);
+		// set the state
+		userLogin(!loggedIn);
 	};
 
 	return (
 		<ScrollView>
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.baseText}>
-					<Text style={styles.titleText}>Embr</Text>
+					<Text style={styles.titleText}>embr</Text>
 				</Text>
 				<View style={styles.buttonContainer}>
 					<View style={styles.button}>
 						<Button
 							style={styles.button}
 							testID="loginButton"
-							// onPress={() => {
-							// 	fetch('http://localhost:3000/ghlogin')
-							// 		.then((res) => res.json())
-							// 		.then((data) => console.log(data, 'data'))
-							// 		.catch((err) => console.log(err));
-							// }}
-							onPress={authenticate}
+							onPress={handleAuth}
 							title="Login with GitHub"
 						/>
+						<Image source={require('./assets/githublogo.png')} />
 					</View>
 				</View>
 			</SafeAreaView>

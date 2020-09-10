@@ -1,5 +1,6 @@
+
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Home';
@@ -21,6 +22,21 @@ import {
 } from 'react-native';
 
 const RootStack = createStackNavigator();
+
+
+// const authUrl = 'http://localhost:3000/ghlogin';
+
+// const OpenGitHubOAuthButton = (url) => {
+// 	const handlePress = useCallback(async () => {
+// 		const supported = await Linking.canOpenURL(url);
+// 		if (supported) {
+// 			await Linking.openURL(url);
+// 		} else {
+// 			Alert.alert(`Invalid URL: ${url}`);
+// 		}
+// 	}, [url]);
+// 	return <Button title="Login with GitHub" onPress={handlePress} />;
+// };
 
 const App = () => {
   const [loggedIn, userLogin] = useState(true);

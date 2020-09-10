@@ -13,25 +13,24 @@ import {
 	Button,
 	Image,
 	Linking,
-	WebBrowser,
 } from 'react-native';
 
 const logoImage = require('./assets/githublogo.png');
 
 const Login = ({ loggedIn, userLogin }) => {
-	const [authResult, setAuthResult] = useState(loggedIn);
-
+	const [authResult, setAuthResult] = useState(false);
+	console.log(userLogin, 'in login');
 	const url = 'http://localhost:3000/ghlogin';
 
-	const handleAuth = () => {
-		Linking.openURL(url);
+	const handleAuth = async () => {
+		await Linking.openURL(url);
 		// set the state
-		userLogin(!loggedIn);
+		userLogin(true);
 	};
 
 	return (
-		<ScrollView>
-			<SafeAreaView style={styles.container}>
+		<ScrollView style={styles.mainContainer}>
+			<View style={styles.container}>
 				<Text style={styles.baseText}>
 					<Text style={styles.titleText}>embr</Text>
 				</Text>
@@ -43,10 +42,9 @@ const Login = ({ loggedIn, userLogin }) => {
 							onPress={handleAuth}
 							title="Login with GitHub"
 						/>
-						<Image source={require('./assets/githublogo.png')} />
 					</View>
 				</View>
-			</SafeAreaView>
+			</View>
 		</ScrollView>
 	);
 };
@@ -72,7 +70,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
+		justifyContent: 'center',
 		marginTop: 100,
+	},
+	mainContainer: {
+		backgroundColor: '#003f5c',
 	},
 });
 

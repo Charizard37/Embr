@@ -20,10 +20,10 @@ import {
 const Menu = ({ navigation, route, loggedIn, userLogout }) => {
 	const [logOut, setLogOut] = useState(loggedIn);
 
-	const handleLogout = () => {
-		setLogOut(!loggedIn);
-		navigation.navigate('App');
-	};
+	// const handleLogout = () => {
+	// 	userLogout(false);
+	// 	navigation.navigate('App');
+	// };
 
 	console.log(route.params.jobObj);
 	return (
@@ -35,7 +35,10 @@ const Menu = ({ navigation, route, loggedIn, userLogout }) => {
 			></Button>
 			<Button title="Stats (Coming Soon)"></Button>
 			<Button title="Profile"></Button>
-			<Button title="Log Out" onPress={handleLogout}></Button>
+			<Button
+				title="Log Out"
+				// onPress={}
+			></Button>
 		</SafeAreaView>
 	);
 };

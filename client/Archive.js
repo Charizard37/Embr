@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import PostCard from './PostCard';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,7 +14,10 @@ import {
 const Archive = ({ navigation }) => {
   return (
     <View>
-      <Text>This is the Archive Screen</Text>
+      <Text style={{ textAlign: 'center', fontSize: 24 }}>Archived Postings</Text>
+      <PostCard></PostCard>
+      <PostCard></PostCard>
+      <PostCard></PostCard>
     </View>
   );
 };

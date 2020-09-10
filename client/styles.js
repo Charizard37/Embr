@@ -60,9 +60,40 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
   },
+  newPostingView: {
+    marginTop: 100,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
   newPosting: {
     height: 30,
-    width: 100,
+    width: '70%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    paddingLeft: 5,
+    marginBottom: 20,
+  },
+  inputIOS: {
+    height: 40,
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    marginTop: 5,
+    borderWidth: 1,
+    backgroundColor: 'white',
+    paddingLeft: 5,
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+  inputAndroid: {
+    height: 30,
+
+    textAlign: 'center',
   },
 });
 

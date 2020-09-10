@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Picker } from '@react-native-community/picker';
+import RNPickerSelect from 'react-native-picker-select';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,25 +12,52 @@ import {
   Alert,
   TextInput,
 } from 'react-native';
+import styles from './styles';
 
 const AddPosting = ({ navigation }) => {
-  const [companyName, setCompanyName] = useState('Company Name');
-  const [positionName, setPositionName] = useState('Position / Job Title');
-  const [appStatus, setAppStatus] = useState('Application Status');
+  const [companyName, setCompanyName] = useState('');
+  const [positionName, setPositionName] = useState('');
+  const [appStatus, setAppStatus] = useState('');
 
   return (
-    <View>
-      <Text>Add a new Posting!!</Text>
-      <TextInput value={companyName} onChangeText={(text) => setCompanyName(text)}></TextInput>
-      <TextInput value={positionName} onChangeText={(text) => setPositionName(text)}></TextInput>
-      <Text>Application Status:</Text>
-      <Picker selectedValue={appStatus} onValueChange={(val) => setAppStatus(val)}>
-        <Picker.Item label='Not yet applied' value='Not yet applied' />
-        <Picker.Item label='Applied, waiting to hear back' value='Applied, waiting to hear back' />
-        <Picker.Item label='Heard back' value='Heard back' />
-        <Picker.Item label='Offer received' value='Offer received' />
-      </Picker>
-    </View>
+    <>
+      <View style={styles.newPostingView}>
+        <Text style={{ fontSize: 20 }}>Position Information:</Text>
+        <TextInput
+          placeholder='Company Name'
+          value={companyName}
+          style={styles.newPosting}
+          onChangeText={(text) => setCompanyName(text)}
+        ></TextInput>
+        <TextInput
+          placeholder='Position / Job Title'
+          value={positionName}
+          style={styles.newPosting}
+          onChangeText={(text) => setPositionName(text)}
+        ></TextInput>
+        <Text style={{ paddingTop: 10, fontSize: 20 }}>Application Status:</Text>
+        <RNPickerSelect
+          selectedValue={appStatus}
+          onValueChange={(val) => setAppStatus(val)}
+          placeholder={{}}
+          style={styles}
+          items={[
+            { label: 'Not yet applied', value: 'Not yet applied' },
+            { label: 'Applied, waiting to hear back', value: 'Applied, waiting to hear back' },
+            { label: 'Heard back', value: 'Heard back' },
+            { label: 'Offer received', value: 'Offer received' },
+          ]}
+        ></RNPickerSelect>
+        <Button
+          title='Add Job Application'
+          onPress={() => {
+            fetch('http://localhost:3000/')
+              .then((data) => data.json())
+              .then((data) => console.log(data));
+          }}
+        ></Button>
+      </View>
+    </>
   );
 };
 

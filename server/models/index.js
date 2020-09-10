@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const UserModel = require('./userModel');
 const JobModel = require('./jobModel');
-const faker = require('faker');
-const _ = require('lodash');
 
 const sequelize = new Sequelize(
   'postgres://volcmzja:siylZtNDjfceVNQeqqSzq6e7kSeWGS0J@lallah.db.elephantsql.com:5432/volcmzja',

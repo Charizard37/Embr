@@ -7,17 +7,20 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      company: DataTypes.STRING,
-      position: DataTypes.STRING,
-      applied: DataTypes.BOOLEAN,
+      user_id: { type: DataTypes.INTEGER, allowNull: false },
+      company: { type: DataTypes.STRING, allowNull: false },
+      position: { type: DataTypes.STRING, allowNull: false },
+      status: { type: DataTypes.STRING, allowNull: false },
+      comments: { type: DataTypes.STRING, allowNull: true },
       phoneScreen: { type: DataTypes.BOOLEAN, allowNull: true },
       interview: { type: DataTypes.BOOLEAN, allowNull: true },
       takeHome: { type: DataTypes.BOOLEAN, allowNull: true },
       doubleDown: { type: DataTypes.BOOLEAN, allowNull: true },
-      user_id: { type: DataTypes.INTEGER, allowNull: false },
     },
     {
       freezeTableName: true,
     }
   );
 };
+
+//make applied into a date?

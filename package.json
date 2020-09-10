@@ -17,14 +17,26 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/picker": "^1.7.1",
+    "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
     "graphql": "^15.3.0",
+    "graphql-passport": "^0.6.3",
     "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+		"passport-github": "^1.1.0",
+		"passport-oauth": "^1.0.0",
     "pg": "^8.3.3",
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "save": "^2.4.0",
+    "react-native-gesture-handler": "^1.8.0",
+    "react-native-picker-select": "^8.0.0",
+    "react-native-reanimated": "^1.13.0",
+    "react-native-safe-area-context": "^3.1.7",
+    "react-native-screens": "^2.10.1",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {

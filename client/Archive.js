@@ -17,7 +17,9 @@ const Archive = ({ navigation, route }) => {
   const jobArray = route.params.jobArray;
   if (jobArray.length) {
     jobArray.forEach((job, i) => {
-      PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+      if (job.status === 'Rejected') {
+        PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+      }
     });
   }
   return (

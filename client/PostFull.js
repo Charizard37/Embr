@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.js';
 import RNPickerSelect from 'react-native-picker-select';
 import CheckBox from '@react-native-community/checkbox';
@@ -19,14 +19,14 @@ import {
 
 const PostFull = ({ navigation, route }) => {
   const [jobArray, setJobArray] = useState({});
-  const [appStatus, setAppStatus] = useState('');
   const [checked, setCheck] = useState(true);
 
   const companyLogo = route.params.logo;
   const { jobObj } = route.params;
-  const { applied, phoneScreen, interview, takeHome, doubleDown } = jobObj;
+  const { status, phoneScreen, interview, takeHome, doubleDown } = jobObj;
+  const [appStatus, setAppStatus] = useState(status);
 
-  console.log(applied, phoneScreen);
+  // console.log(applied, phoneScreen);
 
   //   useEffect(() => {
   //       fetch('http://localhost:3000', {
@@ -53,7 +53,7 @@ const PostFull = ({ navigation, route }) => {
       <RNPickerSelect
         selectedValue={appStatus}
         onValueChange={(val) => setAppStatus(val)}
-        placeholder={{}}
+        placeholder={{ label: appStatus, value: appStatus }}
         style={styles}
         items={[
           { label: 'Not yet applied', value: 'Not yet applied' },
@@ -65,24 +65,20 @@ const PostFull = ({ navigation, route }) => {
       ></RNPickerSelect>
       <View style={styles.fullNotes}>
         <View style={styles.checkContainer}>
-          <Text style={{ fontSize: 24 }}>Applied</Text>
-          <CheckBox value={applied} disabled={false} onValueChange={() => setCheck(!checked)} />
-        </View>
-        <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Double Down</Text>
-          <CheckBox disabled={doubleDown} onValueChange={() => setCheck(!checked)} />
+          <CheckBox value={doubleDown} disabled={false} onValueChange={() => setCheck(!checked)} />
         </View>
         <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Phonescreen</Text>
-          <CheckBox disabled={phoneScreen} onValueChange={() => setCheck(!checked)} />
+          <CheckBox value={phoneScreen} disabled={false} onValueChange={() => setCheck(!checked)} />
         </View>
         <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Interview</Text>
-          <CheckBox disabled={interview} onValueChange={() => setCheck(!checked)} />
+          <CheckBox value={interview} disabled={false} onValueChange={() => setCheck(!checked)} />
         </View>
         <View style={styles.checkContainer}>
           <Text style={{ fontSize: 24 }}>Takehome</Text>
-          <CheckBox disabled={takeHome} onValueChange={() => setCheck(!checked)} />
+          <CheckBox value={takeHome} disabled={false} onValueChange={() => setCheck(!checked)} />
         </View>
 
         {/* Phonescreen, Interview, Takehome, DoubleDowns Checkboxes*/}
@@ -95,6 +91,7 @@ const PostFull = ({ navigation, route }) => {
           multiline={true}
         ></TextInput>
         <Button onPress={() => console.log('Submitted')} title='Save Changes' />
+        <Button onPress={() => console.log('Submitted')} title='Archive Posting' />
       </View>
     </View>
   );

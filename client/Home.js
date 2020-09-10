@@ -24,7 +24,7 @@ const Home = ({ navigation }) => {
       method: 'POST',
       body: JSON.stringify({
         query:
-          '{jobs {position, company, id,  applied, phoneScreen, interview, takeHome, doubleDown }}',
+          '{jobs {position, company, id, status, phoneScreen, interview, takeHome, doubleDown }}',
       }),
       headers: { 'Content-Type': 'application/json' },
     })
@@ -39,7 +39,9 @@ const Home = ({ navigation }) => {
   const PostCardArray = [];
   if (jobArray.length) {
     jobArray.forEach((job, i) => {
-      PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+      if (job.status !== 'Rejected') {
+        PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={job} />);
+      }
     });
   }
 

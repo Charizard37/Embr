@@ -21,7 +21,7 @@ const companyLogoObj = {
   amazon: require('./assets/amazon.png'),
   netflix: require('./assets/netflix.jpg'),
   slack: require('./assets/slack.jpg'),
-  sqaure: require('./assets/square.png'),
+  square: require('./assets/square.png'),
   tesla: require('./assets/tesla.jpg'),
   microsoft: require('./assets/microsoft.png'),
   apple: require('./assets/apple.png'),
@@ -52,7 +52,7 @@ const PostCard = ({ navigation, route, jobObj }) => {
     ? companyLogoObj[name]
     : require('./assets/embr-placeholder.png');
 
-  const color = statusColor(jobObj.applied);
+  const color = statusColor(jobObj.status);
   const cardStyle = { ...styles.PostCardFrame, backgroundColor: color }; //ThESE ARE THE STYLES FOR THE FIRST VIEW COMPONENT
   return (
     <View style={cardStyle}>

@@ -43,12 +43,7 @@ const App = () => {
 	if (!loggedIn) {
 		return (
 			<View>
-				<Login
-				// name="Login"
-				// component={Login}
-				// loggedIn={loggedIn}
-				// userLogin={userLogin}
-				/>
+				<Login loggedIn={loggedIn} userLogin={userLogin} />
 			</View>
 		);
 	} else {

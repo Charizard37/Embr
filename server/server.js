@@ -16,6 +16,7 @@ passport.use(
 			clientID: '6656e9fb701948578da4',
 			clientSecret: '9384e2860766938e1a35a573604381c23dcc5af0',
 			callbackURL: 'http://localhost:3000/auth/github/callback',
+			passReqToCallback: true,
 		},
 		(accessToken, refreshToken, profile, cb) => {
 			console.log('profile', profile);

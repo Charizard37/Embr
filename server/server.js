@@ -2,6 +2,7 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema.js');
 const passport = require('passport');
+const sequelize = require('./models/index.js');
 const GitHubStrategy = require('passport-github').Strategy;
 
 const PORT = 3000;
@@ -27,6 +28,18 @@ passport.use(
 	)
 );
 
+// structure url as full http url and private IP address from QR code and then:3000/
+
+passport.serializeUser((user, done) => {
+	done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+	User.findById(id, (err, user) => {
+		done(err, user);
+	});
+});
+
 app.use(passport.initialize());
 
 app.get('/ghlogin', passport.authenticate('github'));
@@ -49,16 +62,15 @@ app.use(
 	graphqlHTTP({
 		schema,
 		graphiql: true,
-  })
+	})
 );
 //db
-const sequelize = require('./models/index.js');
 
 //Test connection to database
 sequelize
-  .authenticate()
-  .then(() => console.log('Database connected'))
-  .catch((err) => console.log('Error: ' + err));
+	.authenticate()
+	.then(() => console.log('Database connected'))
+	.catch((err) => console.log('Error: ' + err));
 
 // sequelize.sync().then(() => {
 //   console.log('sync');
@@ -73,15 +85,15 @@ app.use('*', function (req, res) {
 });
 
 app.use((err, req, res, next) => {
-  const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
-    status: 400,
-    message: { err: 'An error occurred' }
-  };
-  const errorObj = Object.assign(defaultErr, err);
-  //   console.log('err: ', err);
-  console.error('console error: ', err);
-  return res.status(errorObj.status).send('Something broke!');
+	const defaultErr = {
+		log: 'Express error handler caught unknown middleware error',
+		status: 400,
+		message: { err: 'An error occurred' },
+	};
+	const errorObj = Object.assign(defaultErr, err);
+	//   console.log('err: ', err);
+	console.error('console error: ', err);
+	return res.status(errorObj.status).send('Something broke!');
 });
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostCard from './PostCard.js';
 import styles from './styles.js';
 import Menu from './Menu';
@@ -20,6 +20,24 @@ import {
 
 const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [jobArray, setJobArray] = useState({});
+  useEffect(() => {
+    fetch('http://localhost:3000', {
+      method: 'POST',
+      body: JSON.stringify(username),
+      headers: {'Conent-Type': 'application/json'}
+    })
+    .then(data => data.json())
+    .then(data => {
+      console.log("DATAAAAA", data)
+      // setJobArray(data.jobs);
+    })
+  }, [])
+
+  const PostCardArray = [];
+  for(let i = 0; i < 6; ++i){
+    PostCardArray.push(<PostCard key={i} navigation={navigation} jobObj={jonArray[i]}/>)
+  }
 
   return (
     <ScrollView>
@@ -34,6 +52,7 @@ const Home = ({ navigation }) => {
         <PostCard navigation={navigation}></PostCard>
       </View>
       <View style={styles.rowContainer}>
+      {PostCardArray}
       <PostCard navigation={navigation}></PostCard>
       <PostCard navigation={navigation}></PostCard>
       <PostCard navigation={navigation}></PostCard>

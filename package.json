@@ -33,9 +33,7 @@
     "@react-native-community/eslint-config": "^1.1.0",
     "babel-jest": "^25.1.0",
     "eslint": "^6.5.1",
-    "faker": "^5.1.0",
     "jest": "^25.1.0",
-    "lodash": "^4.17.20",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
     "sequelize-cli": "^6.2.0"

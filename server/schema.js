@@ -7,31 +7,13 @@ const {
   GraphQLNonNull,
   GraphQLBoolean,
 } = require('graphql');
+const UserModel = require('./models/userModel');
+const JobModel = require('./models/jobModel');
+const Sequelize = require('sequelize');
+const sequelize = require('./models/index.js');
 
-//dummy data for now
-const jobDB = [
-  {
-    id: 1,
-    company: 'Google',
-    position: 'Software Engineer',
-    applied: true,
-    interview: true,
-  },
-  {
-    id: 2,
-    company: 'Google',
-    position: 'Front End Engineer',
-    applied: true,
-    interview: true,
-  },
-  {
-    id: 3,
-    company: 'Facebook',
-    position: 'Zuckerbergs Personal Assistant',
-    applied: false,
-    interview: false,
-  },
-];
+const User = UserModel(sequelize, Sequelize);
+const Job = JobModel(sequelize, Sequelize);
 
 //Users
 const UserType = new GraphQLObjectType({
@@ -71,6 +53,7 @@ const JobType = new GraphQLObjectType({
     interview: { type: GraphQLBoolean },
     takeHome: { type: GraphQLBoolean },
     doubleDown: { type: GraphQLBoolean },
+    user_id: { type: GraphQLInt },
   }),
 });
 
@@ -79,20 +62,24 @@ const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     job: {
-      type: JobType,
+      type: new GraphQLList(JobType),
       args: {
-        id: { type: GraphQLInt },
+        company: { type: GraphQLString },
       },
-      resolve(parentValue, { id }) {
-        for (let job of jobDB) {
-          if (job.id === id) return job;
-        }
+      async resolve(parentValue, { company }) {
+        const results = await Job.findAll({
+          where: {
+            company,
+          },
+        });
+        return results;
       },
     },
     jobs: {
       type: new GraphQLList(JobType),
-      resolve(parentValue, args) {
-        return jobDB;
+      async resolve(parentValue, args) {
+        const results = await Job.findAll();
+        return results;
       },
     },
   },
@@ -112,13 +99,69 @@ const mutation = new GraphQLObjectType({
         interview: { type: GraphQLBoolean },
         takeHome: { type: GraphQLBoolean },
         doubleDown: { type: GraphQLBoolean },
+        user_id: { type: GraphQLInt },
       },
-      resolve(parentValue, args) {
-        jobDB.push({
-          id: jobDB.length,
-          ...args,
+      async resolve(parentValue, args) {
+        // console.log(`entered`);
+        const [newJob, created] = await Job.findOrCreate({
+          where: {
+            company: args.company,
+            position: args.position,
+          },
+          defaults: {
+            ...args,
+          },
         });
-        return jobDB[jobDB.length - 1];
+        return created ? newJob : 'Job already exists!';
+      },
+    },
+    editJob: {
+      type: JobType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+        company: { type: GraphQLString },
+        position: { type: GraphQLString },
+        applied: { type: GraphQLBoolean },
+        phoneScreen: { type: GraphQLBoolean },
+        interview: { type: GraphQLBoolean },
+        takeHome: { type: GraphQLBoolean },
+        doubleDown: { type: GraphQLBoolean },
+        user_id: { type: GraphQLInt },
+      },
+      async resolve(parentValue, args) {
+        const selectedJob = await Job.findOne({
+          where: {
+            id: args.id,
+          },
+        });
+        let updatedRecord = Object.assign({}, args, selectedJob);
+        await selectedJob.update(updatedRecord);
+        return updatedRecord;
+      },
+    },
+    deleteJob: {
+      type: JobType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+
+      async resolve(parentValue, args) {
+        console.log(`ran`);
+        const result = await Job.destroy({
+          where: {
+            id: args.id,
+          },
+        });
+        return 'deleted!';
+      },
+    },
+    deleteJobs: {
+      type: new GraphQLList(JobType),
+      async resolve(parentValue, args) {
+        await Job.destroy({
+          truncate: true,
+        });
+        return [];
       },
     },
   },

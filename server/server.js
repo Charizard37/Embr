@@ -49,8 +49,20 @@ app.use(
 	graphqlHTTP({
 		schema,
 		graphiql: true,
-	})
+  })
 );
+//db
+const sequelize = require('./models/index.js');
+
+//Test connection to database
+sequelize
+  .authenticate()
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.log('Error: ' + err));
+
+// sequelize.sync().then(() => {
+//   console.log('sync');
+// });
 
 app.get('/', (req, res) => {
 	res.redirect('/graphql');
@@ -61,15 +73,15 @@ app.use('*', function (req, res) {
 });
 
 app.use((err, req, res, next) => {
-	const defaultErr = {
-		log: 'Express error handler caught unknown middleware error',
-		status: 400,
-		message: { err: 'An error occurred' },
-	};
-	const errorObj = Object.assign(defaultErr, err);
-	//   console.log('err: ', err);
-	console.error('console error: ', err);
-	return res.status(errorObj.status).send('Something broke!');
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occurred' }
+  };
+  const errorObj = Object.assign(defaultErr, err);
+  //   console.log('err: ', err);
+  console.error('console error: ', err);
+  return res.status(errorObj.status).send('Something broke!');
 });
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

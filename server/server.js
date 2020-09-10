@@ -5,20 +5,24 @@ const schema = require('./schema.js');
 const PORT = 3000;
 const app = express();
 
-// //db
-// const sequelize = require('./config.js');
+//db
+const sequelize = require('./models/index.js');
 
-// //Test connection to database
-// sequelize
-//   .authenticate()
-//   .then(() => console.log('Database connected'))
-//   .catch((err) => console.log('Error: ' + err));
+//Test connection to database
+sequelize
+  .authenticate()
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.log('Error: ' + err));
+
+// sequelize.sync().then(() => {
+//   console.log('sync');
+// });
 
 app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    graphiql: true,
+    graphiql: true
   })
 );
 
@@ -34,7 +38,7 @@ app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
-    message: { err: 'An error occurred' },
+    message: { err: 'An error occurred' }
   };
   const errorObj = Object.assign(defaultErr, err);
   //   console.log('err: ', err);

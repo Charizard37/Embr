@@ -110,7 +110,7 @@ const PostFull = ({ navigation, route }) => {
         <TextInput
           style={styles.textInputStyle}
           placeholder='Notes'
-          onChangeText={(text) => console.log(text)}
+          onChangeText={(text) => setAppComments(text)}
           multiline={true}
         >
           {comments}

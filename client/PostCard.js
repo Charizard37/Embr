@@ -30,7 +30,7 @@ const companyLogoObj = {
 const statusColor = (status) => {
   switch (status) {
     case 'Not yet applied':
-      return '#e6f2ff';
+      return '#80bfff';
     case 'Applied, waiting to hear back':
       return '#ffffb3';
     case 'Heard back':

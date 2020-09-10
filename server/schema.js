@@ -46,14 +46,15 @@ const JobType = new GraphQLObjectType({
   name: 'Job',
   fields: () => ({
     id: { type: GraphQLInt },
+    user_id: { type: GraphQLInt },
     company: { type: GraphQLString },
     position: { type: GraphQLString },
-    applied: { type: GraphQLBoolean },
+    status: { type: GraphQLString },
+    comments: { type: GraphQLString },
     phoneScreen: { type: GraphQLBoolean },
     interview: { type: GraphQLBoolean },
     takeHome: { type: GraphQLBoolean },
     doubleDown: { type: GraphQLBoolean },
-    user_id: { type: GraphQLInt },
   }),
 });
 
@@ -61,6 +62,20 @@ const JobType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    userJobs: {
+      type: new GraphQLList(JobType),
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      async resolve(parentValue, { id }) {
+        const results = await Job.findAll({
+          where: {
+            user_id: id,
+          },
+        });
+        return results;
+      },
+    },
     job: {
       type: new GraphQLList(JobType),
       args: {
@@ -94,12 +109,13 @@ const mutation = new GraphQLObjectType({
       args: {
         company: { type: new GraphQLNonNull(GraphQLString) },
         position: { type: new GraphQLNonNull(GraphQLString) },
-        applied: { type: GraphQLBoolean },
+        user_id: { type: new GraphQLNonNull(GraphQLInt) },
+        status: { type: new GraphQLNonNull(GraphQLString) },
+        comments: { type: GraphQLString },
         phoneScreen: { type: GraphQLBoolean },
         interview: { type: GraphQLBoolean },
         takeHome: { type: GraphQLBoolean },
         doubleDown: { type: GraphQLBoolean },
-        user_id: { type: new GraphQLNonNull(GraphQLInt) },
       },
       async resolve(parentValue, args) {
         // console.log(`entered`);
@@ -122,12 +138,12 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLInt) },
         company: { type: GraphQLString },
         position: { type: GraphQLString },
-        applied: { type: GraphQLBoolean },
+        status: { type: GraphQLString },
+        comments: { type: GraphQLString },
         phoneScreen: { type: GraphQLBoolean },
         interview: { type: GraphQLBoolean },
         takeHome: { type: GraphQLBoolean },
         doubleDown: { type: GraphQLBoolean },
-        user_id: { type: GraphQLInt },
       },
       async resolve(parentValue, args) {
         const selectedJob = await Job.findOne({

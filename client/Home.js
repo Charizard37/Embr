@@ -39,8 +39,9 @@ const Home = ({ navigation }) => {
 
   return (
     <ScrollView>
-      <View style={{ paddingLeft: 8, paddingTop: 8 }}>
+      <View>
         <TouchableOpacity
+          style={{ paddingLeft: 8, paddingTop: 8 }}
           onPress={() =>
             navigation.navigate('Menu', { jobObj: { jobStatus: 'applied', company: 'Google' } })
           }
@@ -62,8 +63,6 @@ const Home = ({ navigation }) => {
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
-          </View>
-          <View style={styles.rowContainer}>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>
             <PostCard navigation={navigation}></PostCard>

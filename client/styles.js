@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
     maxHeight: 175,
-    maxWidth: 175,
+    width: '40%',
   },
   CompanyName: {
     marginTop: 5,
@@ -114,7 +114,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rowContainer: {
+    display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textInputStyle: {
     height: 40,

@@ -99,7 +99,7 @@ const mutation = new GraphQLObjectType({
         interview: { type: GraphQLBoolean },
         takeHome: { type: GraphQLBoolean },
         doubleDown: { type: GraphQLBoolean },
-        user_id: { type: GraphQLInt },
+        user_id: { type: new GraphQLNonNull(GraphQLInt) },
       },
       async resolve(parentValue, args) {
         // console.log(`entered`);
@@ -107,6 +107,7 @@ const mutation = new GraphQLObjectType({
           where: {
             company: args.company,
             position: args.position,
+            user_id: args.user_id,
           },
           defaults: {
             ...args,

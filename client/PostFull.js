@@ -1,62 +1,123 @@
-import React, { useState } from 'react';
-import styles from "./styles.js";
+import React, { useState, useEffect } from 'react';
+import styles from './styles.js';
+import RNPickerSelect from 'react-native-picker-select';
+import CheckBox from '@react-native-community/checkbox';
 
 import {
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-    StatusBar,
-    Button,
-    Alert,
-    Image,
-    TouchableOpacity,
-    TextInput,
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+  Button,
+  Alert,
+  Image,
+  TouchableOpacity,
+  TextInput,
 } from 'react-native';
 
-const companyLogo = 'twitter.png';
-
-const PostFull = ({ navigation }) => {
+const PostFull = ({ navigation, route }) => {
   const [jobArray, setJobArray] = useState({});
-//   useEffect(() => {
-//       fetch('http://localhost:3000', {
-//           method: 'POST',
-//           body: JSON.stringify(username),
-//           headers: {'Conent-Type': 'application/json'}
-//       })
-//       .then(data => data.json())
-//       .then(data => {
-//           console.log("DATAAAAA", data)
-//           // setJobArray(data.jobs);
-//       })
-//   }, [])
+  const [checked, setCheck] = useState(true);
+
+  const companyLogo = route.params.logo;
+  const { jobObj } = route.params;
+  const { id, status, phoneScreen, interview, takeHome, doubleDown, comments } = jobObj;
+
+  const [appStatus, setAppStatus] = useState(status);
+  const [appPhoneScreen, setAppPhoneScreen] = useState(phoneScreen);
+  const [appInterview, setAppInterview] = useState(interview);
+  const [appTakeHome, setAppTakeHome] = useState(takeHome);
+  const [appDoubleDown, setAppDoubleDown] = useState(doubleDown);
+  const [appComments, setAppComments] = useState(comments);
+
+  const saveChanges = () => {
+    fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      body: JSON.stringify({
+        query: `mutation {editJob(id: ${id}, status: "${appStatus}", phoneScreen: ${appPhoneScreen}, interview: ${appInterview}, takeHome: ${appTakeHome}, doubleDown: ${appDoubleDown}, comments: "${appComments}"){id}}`,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log('Mutated that sucka');
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <View style={styles.containerFull}>
-        <View style={styles.rowContainer}>
-            <View>
-                <Text style={styles.CompanyNameFull}>Company Name</Text>
-                <Text style={styles.JobTitleFull}>Job Title</Text>
-            </View>
-            <Image style={styles.logo} source={require(`./assets/${companyLogo}`)} />
+      <View style={styles.companyContainer}>
+        <View>
+          <Text style={styles.CompanyNameFull}>{jobObj.company}</Text>
+          <Text style={styles.JobTitleFull}>{jobObj.position}</Text>
         </View>
-        
-        
-        
-        <Text>STATUS</Text>
-        {/* Alex's status picking element here*/}
+        <Image style={styles.logo} source={companyLogo} />
+      </View>
 
-
+      <RNPickerSelect
+        selectedValue={appStatus}
+        onValueChange={(val) => setAppStatus(val)}
+        placeholder={{ label: appStatus, value: appStatus }}
+        style={styles}
+        items={[
+          { label: 'Not yet applied', value: 'Not yet applied' },
+          { label: 'Applied, waiting to hear back', value: 'Applied, waiting to hear back' },
+          { label: 'Heard back', value: 'Heard back' },
+          { label: 'Offer received', value: 'Offer received' },
+          { label: 'Rejected', value: 'Rejected' },
+        ]}
+      ></RNPickerSelect>
+      <View style={styles.fullNotes}>
+        <View style={styles.checkContainer}>
+          <Text style={{ fontSize: 24 }}>Double Down</Text>
+          <CheckBox
+            value={doubleDown}
+            disabled={false}
+            onValueChange={() => setAppDoubleDown(!appDoubleDown)}
+          />
+        </View>
+        <View style={styles.checkContainer}>
+          <Text style={{ fontSize: 24 }}>Phonescreen</Text>
+          <CheckBox
+            value={phoneScreen}
+            disabled={false}
+            onValueChange={() => setAppPhoneScreen(!appPhoneScreen)}
+          />
+        </View>
+        <View style={styles.checkContainer}>
+          <Text style={{ fontSize: 24 }}>Interview</Text>
+          <CheckBox
+            value={interview}
+            disabled={false}
+            onValueChange={() => setAppInterview(!appInterview)}
+          />
+        </View>
+        <View style={styles.checkContainer}>
+          <Text style={{ fontSize: 24 }}>Take-Home</Text>
+          <CheckBox
+            value={takeHome}
+            disabled={false}
+            onValueChange={() => setAppTakeHome(!appTakeHome)}
+          />
+        </View>
 
         {/* Phonescreen, Interview, Takehome, DoubleDowns Checkboxes*/}
-
-        <View style={styles.rowContainer}>
-            <View style={styles.container}>
-                <TextInput style={styles.textInputStyle} placeholder="Type here to translate!" onChangeText={(text) => console.log(text)}  ></TextInput>
-                <Button onPress={() => console.log("Submitted")} title="Submit"/>  
-            </View>
-        </View>
-        
+      </View>
+      <View>
+        <TextInput
+          style={styles.textInputStyle}
+          placeholder='Notes'
+          onChangeText={(text) => console.log(text)}
+          multiline={true}
+        >
+          {comments}
+        </TextInput>
+        <Button onPress={saveChanges} title='Save Changes' />
+        <Button onPress={() => console.log('Submitted')} title='Archive Posting' />
+      </View>
     </View>
   );
 };

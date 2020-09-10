@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Picker } from '@react-native-community/picker';
 import RNPickerSelect from 'react-native-picker-select';
 import {
   SafeAreaView,
@@ -46,6 +45,7 @@ const AddPosting = ({ navigation }) => {
             { label: 'Applied, waiting to hear back', value: 'Applied, waiting to hear back' },
             { label: 'Heard back', value: 'Heard back' },
             { label: 'Offer received', value: 'Offer received' },
+            { label: 'Rejected', value: 'Rejected' },
           ]}
         ></RNPickerSelect>
         <Button

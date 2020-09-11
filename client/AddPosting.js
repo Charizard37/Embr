@@ -29,6 +29,7 @@ const AddPosting = ({ navigation }) => {
       .then((data) => data.json())
       .then((data) => {
         console.log('Mutated that sucka');
+        navigation.goBack();
       })
       .catch((error) => console.log(error));
   };

@@ -38,7 +38,7 @@ const RootStack = createStackNavigator();
 // };
 
 const App = () => {
-  const [loggedIn, userLogin] = useState(true);
+  const [loggedIn, userLogin] = useState(false);
 
   if (!loggedIn) {
     return (

@@ -43,6 +43,7 @@ const PostFull = ({ navigation, route }) => {
       .then((data) => data.json())
       .then((data) => {
         console.log('Mutated that sucka');
+        navigation.goBack();
       })
       .catch((error) => console.log(error));
   };

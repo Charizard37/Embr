@@ -1,5 +1,4 @@
 # Embr
 
-![Alt text](./client/assets/screenshot1.png?raw=true 'Home Screen')
-
-![Alt text](./client/assets/screenshot2.png?raw=true 'Edit Screen')
+<img src="./client/assets/screenshot1.png" width="300">
+<img src="./client/assets/screenshot2.png" width="300">
